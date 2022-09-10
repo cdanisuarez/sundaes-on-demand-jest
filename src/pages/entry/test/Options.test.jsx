@@ -26,7 +26,7 @@ test('Displays image for each tooping from server', async () => {
   ]);
 });
 
-test('Update scoop sutotal when scoops change', async () => {
+test('Update scoop subtotal when scoops change', async () => {
   render(<Options optionType="scoops" />);
 
   const scoopSubtotal = screen.getByText('Scoops total: $', { exact: false });
@@ -45,4 +45,30 @@ test('Update scoop sutotal when scoops change', async () => {
   userEvent.clear(chocolateInput);
   userEvent.type(chocolateInput, '2');
   expect(scoopSubtotal).toHaveTextContent('6.00');
+});
+
+test('Update toppings subtotal when topping is checked/unchecked', async () => {
+  render(<Options optionType="toppings" />);
+
+  const toppingSubtotal = screen.getByText('Toppings total: $', {
+    exact: false,
+  });
+  expect(toppingSubtotal).toHaveTextContent('0.00');
+
+  const cherriesCheckbox = await screen.findByRole('checkbox', {
+    name: 'Cherries',
+  });
+
+  const hotFudgeCheckbox = await screen.findByRole('checkbox', {
+    name: 'Hot fudge',
+  });
+
+  userEvent.click(cherriesCheckbox);
+  expect(toppingSubtotal).toHaveTextContent('1.50');
+
+  userEvent.click(hotFudgeCheckbox);
+  expect(toppingSubtotal).toHaveTextContent('3.00');
+
+  userEvent.click(cherriesCheckbox);
+  expect(toppingSubtotal).toHaveTextContent('1.50');
 });
