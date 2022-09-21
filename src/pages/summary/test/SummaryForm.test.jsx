@@ -9,7 +9,7 @@ import SummaryForm from '../SummaryForm';
 
 describe('<SummaryForm />', () => {
   test('Initial condition', () => {
-    render(<SummaryForm />);
+    render(<SummaryForm setOrderPhase={jest.fn()} />);
 
     const button = screen.getByRole('button', { name: /confirm order/i });
     const checkbox = screen.getByRole('checkbox', {
@@ -21,7 +21,7 @@ describe('<SummaryForm />', () => {
   });
 
   test('Check/uncheck terms and button is enabled/disabled', () => {
-    render(<SummaryForm />);
+    render(<SummaryForm setOrderPhase={jest.fn()} />);
 
     const button = screen.getByRole('button', { name: /confirm order/i });
     const checkbox = screen.getByRole('checkbox', {
@@ -38,7 +38,7 @@ describe('<SummaryForm />', () => {
   });
 
   test('Popover responds to hover', async () => {
-    render(<SummaryForm />);
+    render(<SummaryForm setOrderPhase={jest.fn()} />);
 
     const nullPopover = screen.queryByText(
       /no ice cream will actually be delivered/i

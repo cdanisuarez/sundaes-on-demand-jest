@@ -14,7 +14,7 @@ test('Handles error for scoops and toppings routes', async () => {
     }),
   ]);
 
-  render(<OrderEntry />);
+  render(<OrderEntry setOrderPhase={jest.fn()} />);
 
   await waitFor(async () => {
     const alerts = await screen.findAllByRole('alert');
@@ -24,7 +24,7 @@ test('Handles error for scoops and toppings routes', async () => {
 
 describe('Grand total', () => {
   test('Updates properly if scoop is added first', async () => {
-    render(<OrderEntry />);
+    render(<OrderEntry setOrderPhase={jest.fn()} />);
     const grandTotal = screen.getByRole('heading', {
       name: /grand total: \$/i,
     });
@@ -46,7 +46,7 @@ describe('Grand total', () => {
   });
 
   test('Updates properly if topping is added first', async () => {
-    render(<OrderEntry />);
+    render(<OrderEntry setOrderPhase={jest.fn()} />);
     const grandTotal = screen.getByRole('heading', {
       name: /grand total: \$/i,
     });
@@ -67,7 +67,7 @@ describe('Grand total', () => {
   });
 
   test('Updates properly if item is removed', async () => {
-    render(<OrderEntry />);
+    render(<OrderEntry setOrderPhase={jest.fn()} />);
     const grandTotal = screen.getByRole('heading', {
       name: /grand total: \$/i,
     });
